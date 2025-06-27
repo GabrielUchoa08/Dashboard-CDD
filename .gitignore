@@ -1,15 +1,10 @@
-# Ambientes virtuais
+# Ignorar pastas de ambiente e cache do Python
 venv/
 .venv/
 env/
-Lib/
-Scripts/
-
-# Arquivos compilados do Python
 __pycache__/
-*.pyc
 
-# Arquivos de dados grandes (NÃO ENVIAR PARA O GITHUB)
+# Ignorar o ARQUIVO GRANDE de dados e outras cópias
 all_jobs.csv
 all_jobs_com_coordenadas.csv
-*.xlsx
+all_jobs_local.csv

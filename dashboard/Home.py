@@ -23,8 +23,6 @@ if not st.session_state.dados_carregados:
     else:
         st.stop()
 
-
-
 # --- Conteúdo da Página Home ---
 st.title("📊 Dashboard sobre vagas de emprego em tecnologia nos EUA")
 st.markdown("Esse dashboard contém dados obtidos do dataset 100K US Tech Jobs, com dados de outubro de 2024 a dezembro de 2024 com vagas de empregos na área de tecnologia, os dados foram colhidos com a ajuda do Jobspy (uma ferramenta de busca e seleção de empregos) em sites como Indeed, ZipRecruiter e Glassdoor")
