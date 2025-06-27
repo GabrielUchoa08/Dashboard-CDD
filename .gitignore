@@ -5,6 +5,3 @@ env/
 /Lib/
 /Scripts/
 
-# Arquivos compilados do Python
-__pycache__/
-*.pyc
