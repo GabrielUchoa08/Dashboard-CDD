@@ -15,7 +15,7 @@ st.set_page_config(
 # --- Carregamento de Dados ---
 if not st.session_state.dados_carregados:
     # >>> ESTA É A LINHA QUE FOI CORRIGIDA <<<
-    all_jobs_df, df_salario = carregar_e_limpar_dados('all_jobs_amostra.csv')
+    all_jobs_df, df_salario = carregar_e_limpar_dados()
     
     if all_jobs_df is not None:
         st.session_state['all_jobs_df'] = all_jobs_df

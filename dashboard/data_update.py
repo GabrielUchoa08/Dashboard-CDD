@@ -79,28 +79,30 @@ def categorizar_cargo(titulo):
     return 'Outros'
 
 @st.cache_data
-def carregar_e_limpar_dados(caminho_arquivo):
-    """
-    Carrega o arquivo .csv, realiza a limpeza, extrai a cidade e retorna os DataFrames.
-    """
+def carregar_e_limpar_dados(): # A função não precisa mais de argumentos
+    
+    # >>> MUDE APENAS O LINK ABAIXO PARA O SEU LINK DO GOOGLE DRIVE <<<
+    URL_DO_ARQUIVO = "https://drive.google.com/uc?export=download&id=SEU_FILE_ID_AQUI"
+    
     try:
-        all_jobs = pd.read_csv(caminho_arquivo)
-    except FileNotFoundError:
-        st.error(f"Erro: O arquivo '{caminho_arquivo}' não foi encontrado.")
+        # Mostra uma mensagem enquanto carrega, pois pode demorar um pouco
+        with st.spinner("Carregando o dataset completo... Por favor, aguarde."):
+            all_jobs = pd.read_csv(URL_DO_ARQUIVO)
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados do Google Drive. Verifique se o link está público e correto. Erro: {e}")
         return None, None
 
+    # O resto da sua função de limpeza continua exatamente igual
     all_jobs = all_jobs[~all_jobs['location'].str.contains('Remote', na=False)]
     all_jobs['location'] = all_jobs['location'].replace('Seattle, WA, USA', 'Seattle, WA, US')
     all_jobs = all_jobs[all_jobs['location'] != 'US']
     all_jobs['city'] = all_jobs['location'].astype(str).apply(lambda x: x.split(',')[0].strip())
     all_jobs = all_jobs[~all_jobs['city'].str.isnumeric()]
-
+    
     df_salario = all_jobs.dropna(subset=['mean_salary']).copy()
     df_salario['mean_salary'] = pd.to_numeric(df_salario['mean_salary'], errors='coerce')
     df_salario = df_salario.dropna(subset=['mean_salary'])
     df_salario.loc[df_salario['mean_salary'] > 1_000_000, 'mean_salary'] /= 100
     df_salario = df_salario[df_salario['mean_salary'] < 1_000_000]
-
-    
 
     return all_jobs, df_salario
