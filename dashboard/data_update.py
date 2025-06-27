@@ -82,7 +82,7 @@ def categorizar_cargo(titulo):
 def carregar_e_limpar_dados(): # A função não precisa mais de argumentos
     
     # >>> MUDE APENAS O LINK ABAIXO PARA O SEU LINK DO GOOGLE DRIVE <<<
-    URL_DO_ARQUIVO = "https://drive.google.com/uc?export=download&id=SEU_FILE_ID_AQUI"
+    URL_DO_ARQUIVO = "https://drive.google.com/uc?export=download&id=1WKW1J6Xo0HQWN8mxmBN1GY2WNjFhvwKL"
     
     try:
         # Mostra uma mensagem enquanto carrega, pois pode demorar um pouco
