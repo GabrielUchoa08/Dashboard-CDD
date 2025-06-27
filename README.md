@@ -1,0 +1,3 @@
+Esse projeto é referente a 2º Unidade da matéria de Ciência de dados (DCA3501) do Departamento de Computação e Automação (DCA) da Universidade Federal do Rio Grande do Norte (UFRN) lecionada pelo professor Luiz Affonso H. G. de Oliveira, no qual consiste em criar um Dashboard para visualização de dados de um dataset previamente escolhido. 
+
+Discentes: Gabriel Uchôa da Escóssia e Cassio Costa A. Domingos
