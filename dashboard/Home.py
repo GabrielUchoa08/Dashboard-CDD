@@ -8,7 +8,6 @@ inicializar_estado()
 
 st.set_page_config(
     page_title="Home | 100K US Tech Jobs",
-    page_icon="🏠",
     layout="wide"
 )
 
@@ -24,16 +23,14 @@ if not st.session_state.dados_carregados:
     else:
         st.stop()
 
-# --- Chamada das funções globais ---
-criar_sidebar()
-filtrar_dados() 
+
 
 # --- Conteúdo da Página Home ---
-st.title("📊 Dashboard de Análise de Vagas de Emprego")
-st.markdown("Bem-vindo! Este dashboard apresenta uma análise interativa de vagas de emprego na área de tecnologia nos EUA.")
-st.markdown("Use a barra lateral à esquerda para navegar entre as diferentes análises e aplicar filtros globais.")
+st.title("📊 Dashboard sobre vagas de emprego em tecnologia nos EUA")
+st.markdown("Esse dashboard contém dados obtidos do dataset 100K US Tech Jobs, com dados de outubro de 2024 a dezembro de 2024 com vagas de empregos na área de tecnologia, os dados foram colhidos com a ajuda do Jobspy (uma ferramenta de busca e seleção de empregos) em sites como Indeed, ZipRecruiter e Glassdoor")
+st.markdown("---")
 
-st.subheader("Visão Geral dos Dados Filtrados")
+st.subheader("Visão Geral dos Dados")
 total_vagas = len(st.session_state['all_jobs_df_filtrado'])
 total_empresas = st.session_state['all_jobs_df_filtrado']['company'].nunique()
 salario_medio = st.session_state['df_salario_filtrado']['mean_salary'].mean() if not st.session_state['df_salario_filtrado'].empty else 0
@@ -42,5 +39,10 @@ col1, col2, col3 = st.columns(3)
 col1.metric("Total de Vagas Analisadas", f"{total_vagas:,}")
 col2.metric("Total de Empresas Únicas", f"{total_empresas:,}")
 col3.metric("Média Salarial Anual (USD)", f"${salario_medio:,.2f}")
+st.markdown("---")
+st.subheader("Sobre o projeto:")
+st.markdown("Esse projeto é referente a 2º Unidade da matéria de Ciência de dados (DCA3501) do Departamento de Computação e Automação (DCA) da Universidade Federal do Rio Grande do Norte (UFRN) lecionada pelo professor Luiz Affonso H. G. de Oliveira, no qual consiste em criar um Dashboard para visualização de dados de um dataset previamente escolhido.")
 
-st.info("Navegue pelas páginas na barra lateral para ver análises detalhadas.")
+st.subheader("Discentes:")
+st.markdown("Cassio Costa Alves Domingues <br> Gabriel Uchôa da Escóssia", unsafe_allow_html=True)
+

@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import gdown
 
 def inicializar_estado():
     """
@@ -79,17 +80,20 @@ def categorizar_cargo(titulo):
     return 'Outros'
 
 @st.cache_data
-def carregar_e_limpar_dados(): # A função não precisa mais de argumentos
-    
-    # >>> MUDE APENAS O LINK ABAIXO PARA O SEU LINK DO GOOGLE DRIVE <<<
-    URL_DO_ARQUIVO = "https://drive.google.com/uc?export=download&id=1WKW1J6Xo0HQWN8mxmBN1GY2WNjFhvwKL"
-    
+def carregar_e_limpar_dados():
+    # Este é o ID do seu arquivo no Google Drive
+    FILE_ID = "1WKW1J6Xo0HQWN8mxmBN1GY2WNjFhvwKL"
+    OUTPUT_FILE = "all_jobs_local.csv" # Nome temporário para o arquivo baixado
+
     try:
-        # Mostra uma mensagem enquanto carrega, pois pode demorar um pouco
-        with st.spinner("Carregando o dataset completo... Por favor, aguarde."):
-            all_jobs = pd.read_csv(URL_DO_ARQUIVO)
+        with st.spinner("Carregando o dataset completo do Google Drive... Isso pode levar um momento."):
+            # Baixa o arquivo do Google Drive usando gdown
+            gdown.download(id=FILE_ID, output=OUTPUT_FILE, quiet=False)
+            # Lê o arquivo que acabou de ser baixado
+            all_jobs = pd.read_csv(OUTPUT_FILE)
+            
     except Exception as e:
-        st.error(f"Erro ao carregar os dados do Google Drive. Verifique se o link está público e correto. Erro: {e}")
+        st.error(f"Erro ao carregar ou processar os dados. Verifique o compartilhamento no Google Drive. Erro: {e}")
         return None, None
 
     # O resto da sua função de limpeza continua exatamente igual
