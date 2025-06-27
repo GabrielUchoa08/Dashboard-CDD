@@ -2,6 +2,14 @@
 venv/
 .venv/
 env/
-/Lib/
-/Scripts/
+Lib/
+Scripts/
 
+# Arquivos compilados do Python
+__pycache__/
+*.pyc
+
+# Arquivos de dados grandes (NÃO ENVIAR PARA O GITHUB)
+all_jobs.csv
+all_jobs_com_coordenadas.csv
+*.xlsx
