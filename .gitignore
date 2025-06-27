@@ -1,0 +1,10 @@
+# Ambientes virtuais
+venv/
+.venv/
+env/
+/Lib/
+/Scripts/
+
+# Arquivos compilados do Python
+__pycache__/
+*.pyc
