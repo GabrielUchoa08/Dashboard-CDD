@@ -1,27 +1,35 @@
-# Arquivo: Home.py
+# Arquivo: Home.pyAdd commentMore actions
 
 import streamlit as st
 import pandas as pd
-from data_update import carregar_e_limpar_dados, inicializar_estado, criar_sidebar, filtrar_dados
+# >>> MUDANÇA: Importar a nova função
+from data_update import carregar_e_limpar_dados, inicializar_estado, criar_sidebar
 
 inicializar_estado()
 
 st.set_page_config(
-    page_title="Home | 100K US Tech Jobs",
+    page_title="100K US Tech Jobs",
     layout="wide"
 )
 
-# --- Carregamento de Dados ---
+# Carregamento de Dados (só executa se os dados ainda não estiverem na sessão)
 if not st.session_state.dados_carregados:
-    # >>> ESTA É A LINHA QUE FOI CORRIGIDA <<<
-    all_jobs_df, df_salario = carregar_e_limpar_dados()
-    
+    all_jobs_df, df_salario = carregar_e_limpar_dados('all_jobs.csv')
     if all_jobs_df is not None:
         st.session_state['all_jobs_df'] = all_jobs_df
         st.session_state['df_salario'] = df_salario
         st.session_state['dados_carregados'] = True
     else:
         st.stop()
+
+
+# --- Lógica de filtragem ---
+if st.session_state.selected_cities:
+    st.session_state['all_jobs_df_filtrado'] = st.session_state['all_jobs_df'][st.session_state['all_jobs_df']['city'].isin(st.session_state.selected_cities)]
+    st.session_state['df_salario_filtrado'] = st.session_state['df_salario'][st.session_state['df_salario']['city'].isin(st.session_state.selected_cities)]
+else:
+    st.session_state['all_jobs_df_filtrado'] = st.session_state['all_jobs_df']
+    st.session_state['df_salario_filtrado'] = st.session_state['df_salario']
 
 # --- Conteúdo da Página Home ---
 st.title("📊 Dashboard sobre vagas de emprego em tecnologia nos EUA")
@@ -43,4 +51,3 @@ st.markdown("Esse projeto é referente a 2º Unidade da matéria de Ciência de 
 
 st.subheader("Discentes:")
 st.markdown("Cassio Costa Alves Domingues <br> Gabriel Uchôa da Escóssia", unsafe_allow_html=True)
-
