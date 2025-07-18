@@ -101,6 +101,4 @@ def carregar_e_limpar_dados(caminho_arquivo):
     df_salario.loc[df_salario['mean_salary'] > 1_000_000, 'mean_salary'] /= 100
     df_salario = df_salario[df_salario['mean_salary'] < 1_000_000]
 
-    
-
     return all_jobs, df_salario
